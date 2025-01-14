@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.roiofthesuisse</groupId>
+	<artifactId>kujira-no-hara</artifactId>
+	<version>7.60</version>
+
+	<properties>
+		<maven.compiler.release>21</maven.compiler.release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<transformers>
+						<transformer
+								implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+							<mainClass>com.github.achaaab.solitaire.Application</mainClass>
+						</transformer>
+					</transformers>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<repositories>
+
+		<repository>
+			<id>central</id>
+			<name>Maven Central</name>
+			<url>https://repo1.maven.org/maven2/</url>
+		</repository>
+
+		<repository>
+			<id>beatunes</id>
+			<name>beaTunes</name>
+			<url>https://www.beatunes.com/repo/maven2/</url>
+		</repository>
+
+		<repository>
+			<id>oldies</id>
+			<url>file:///${project.basedir}/oldies-repository</url>
+		</repository>
+
+	</repositories>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jogg</artifactId>
+			<version>0.0.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jorbis</artifactId>
+			<version>0.0.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>java.jfxrt</groupId>
+			<artifactId>jfxrt</artifactId>
+			<version>unknown</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20150729</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.19.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.19.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-collections4</artifactId>
+			<version>4.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>1.63.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>9.4.1.v20170120</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlet</artifactId>
+			<version>9.4.1.v20170120</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.13.2</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+</project>
