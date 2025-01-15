@@ -57,11 +57,6 @@
 			<url>https://www.beatunes.com/repo/maven2/</url>
 		</repository>
 
-		<repository>
-			<id>oldies</id>
-			<url>file:///${project.basedir}/oldies-repository</url>
-		</repository>
-
 	</repositories>
 
 	<dependencies>
@@ -76,12 +71,6 @@
 			<groupId>com.jcraft</groupId>
 			<artifactId>jorbis</artifactId>
 			<version>0.0.17</version>
-		</dependency>
-
-		<dependency>
-			<groupId>java.jfxrt</groupId>
-			<artifactId>jfxrt</artifactId>
-			<version>unknown</version>
 		</dependency>
 
 		<dependency>

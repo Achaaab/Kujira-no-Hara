@@ -7,33 +7,42 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+import static utilitaire.ResourceUtility.openInputStream;
+import static utilitaire.son.Musique.FormatAudio.OGG;
+
 /**
  * Fichier audio au format OGG.
  */
 public class MusiqueOgg extends Musique {
+
 	protected MusiqueOgg(final String nom, final TypeMusique type, final float volume) {
+
 		super(nom, type, volume);
-		
-		this.format = FormatAudio.OGG;
+
+		format = OGG;
+		var resourceName = DOSSIER_AUDIO + type + "/" + nom;
 
 		try {
-			stream = ResourceUtility.openInputStream(DOSSIER_AUDIO+type+"/" + nom);
-			this.clip = new OggClip(this.stream);
+
+			stream = openInputStream(resourceName);
+			clip = new OggClip(stream);
+
 			//volume initial
 			if (volume < VOLUME_MAXIMAL) {
-				this.modifierVolume(volume);
+				modifierVolume(volume);
 			}
+
 			//Duree
 			if (TypeMusique.ME.equals(type)) {
 				this.dureeMillisecondes = (long) calculerDuree();
 			}
-		} catch (FileNotFoundException e) {
-			LOG.error(e);
-		} catch (IOException e) {
-			LOG.error(e);
+
+		} catch (IOException exception) {
+
+			LOG.error("impossible de lire le son " + resourceName, exception);
 		}
 	}
-	
+
 	/**
 	 * Calculer la Duree de la musique Ogg.
 	 * @return Duree (en millisecondes)

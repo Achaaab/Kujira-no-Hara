@@ -88,7 +88,7 @@ public abstract class InterpreteurDeJson {
 	 * @throws Exception erreur dans la lecture du fichier JSON
 	 */
 	public static JSONObject ouvrirJsonNouvellePartie() throws Exception {
-		return ouvrirJson("nouvellePartie", "Data/");
+		return ouvrirJson("nouvellePartie.debut", "Data/");
 	}
 	
 	/**

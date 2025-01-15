@@ -201,9 +201,9 @@ public abstract class Commande {
 	}
 
 	/**
-	 * Traduit un objet JSON repr�sentant une Commande en vrai objet Commande.
+	 * Traduit un objet JSON représentant une Commande en vrai objet Commande.
 	 * 
-	 * @param commandeJson objet JSON repr�sentant une Commande
+	 * @param commandeJson objet JSON représentant une Commande
 	 * @return objet Commande
 	 */
 	public static Commande recupererUneCommande(final JSONObject commandeJson) {
@@ -223,7 +223,7 @@ public abstract class Commande {
 			final HashMap<String, Object> parametres = new HashMap<String, Object>();
 			while (parametresNoms.hasNext()) {
 				parametreNom = parametresNoms.next();
-				if (!parametreNom.equals("nom")) { // le nom servait a trouver la classe, ici on ne s'int�resse qu'aux
+				if (!parametreNom.equals("nom")) { // le nom servait a trouver la classe, ici on ne s'intéresse qu'aux
 													// parametres
 					parametreValeur = commandeJson.get(parametreNom);
 					parametres.put(parametreNom, parametreValeur);

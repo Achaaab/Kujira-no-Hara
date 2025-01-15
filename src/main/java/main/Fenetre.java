@@ -15,7 +15,6 @@ import javax.swing.JFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javafx.embed.swing.JFXPanel;
 import main.capteurs.CapteurClavier;
 import main.capteurs.CapteurFenetre;
 import main.capteurs.CapteurSouris;
@@ -60,12 +59,6 @@ public final class Fenetre extends JFrame {
 		// https://stackoverflow.com/questions/14025718/javafx-toolkit-not-initialized-when-trying-to-play-an-mp3-file-through-mediap
 		// TODO ne plus utiliser de fichiers MP3 !
 
-		try {
-			@SuppressWarnings("unused") final JFXPanel fxPanel = new JFXPanel();
-		}catch (Exception e) {
-
-		}
-		
 		// Dimensionnement
 		if (this.pleinEcran) {
 			// Mode plein ecran

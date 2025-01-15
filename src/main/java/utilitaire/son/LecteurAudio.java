@@ -1,13 +1,11 @@
 package utilitaire.son;
 
-import java.io.File;
-import java.io.FilenameFilter;
-import java.util.ArrayList;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javafx.scene.media.MediaException;
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 
 /**
  * Classe utilitaire charg�e de lire les fichiers audio du jeu.
@@ -40,8 +38,6 @@ public abstract class LecteurAudio {
 			musique = new MusiqueOgg(nom, Musique.TypeMusique.SE, volume);
 		} else if (nom.endsWith(".wav")) {
 			musique = new MusiqueWav(nom, Musique.TypeMusique.SE, volume);
-		} else if (nom.endsWith(".mp3")) {
-			musique = new MusiqueMp3(nom, Musique.TypeMusique.SE, volume);
 		} else {
 			LOG.error("Format audio inconnu : " + nom);
 			return;
@@ -64,16 +60,6 @@ public abstract class LecteurAudio {
 			musique = new MusiqueOgg(nom, Musique.TypeMusique.ME, volume);
 		} else if (nom.endsWith(".wav")) {
 			musique = new MusiqueWav(nom, Musique.TypeMusique.ME, volume);
-		} else if (nom.endsWith(".mp3")) {
-			try {
-				musique = new MusiqueMp3(nom, Musique.TypeMusique.ME, volume);
-			} catch (java.lang.UnsatisfiedLinkError e1) {
-				LOG.error("Une librairie a la con manque pour lire les fichiers MP3", e1);
-				return;
-			} catch (MediaException e2) {
-				LOG.error("Impossible d'ouvrir le fichier MP3", e2);
-				return;
-			}
 		} else {
 			LOG.error("Format audio inconnu : "+nom);
 			return;
@@ -98,21 +84,21 @@ public abstract class LecteurAudio {
 	 */
 	public static synchronized void playBgm(final String nom, final float volume, final int piste) {
 		// Si le nom est vide, on ignore
-		if (nom == null || nom.equals("")) {
+		if (nom == null || nom.isEmpty()) {
 			LOG.debug("Nom de musique vide : on ne fait rien.");
 			return;
 		}
 		
 		if (LecteurAudio.bgmEnCours[piste] != null && nom.equals(LecteurAudio.bgmEnCours[piste].nom)) {
-			// meme morceau que le pr�c�dent
+			// meme morceau que le précédent
 			if (bgmEnCours[piste].volumeActuel != volume) {
 				// Modification du volume uniquement
 				bgmEnCours[piste].modifierVolume(volume);
 			}
 		} else {
-			// Morceau different du pr�c�dent
+			// Morceau différent du précédent
 			
-			// On eteint la musique actuelle
+			// On éteint la musique actuelle
 			stopBgm(piste);
 			
 			// On lance la nouvelle
@@ -121,18 +107,8 @@ public abstract class LecteurAudio {
 				musique = new MusiqueOgg(nom, Musique.TypeMusique.BGM, volume);
 			} else if (nom.endsWith(".wav")) {
 				musique = new MusiqueWav(nom, Musique.TypeMusique.BGM, volume);
-			} else if (nom.endsWith(".mp3")) {
-				try {
-					musique = new MusiqueMp3(nom, Musique.TypeMusique.BGM, volume);
-				} catch (javafx.scene.media.MediaException e1) {
-					LOG.error("Impossible de trouver le BGM \""+nom+"\" de la map", e1);
-					return;
-				} catch (java.lang.UnsatisfiedLinkError e2) {
-					LOG.error("Une librairie a la con manque pour lire les fichiers MP3",e2);
-					return;
-				}
 			} else {
-				//c'est s�rement encore un connard qui a oubli� l'extension du fichier audio dans le JSON
+				//c'est sûrement encore un connard qui a oublié l'extension du fichier audio dans le JSON
 				final File dossierAudio = new File(Musique.DOSSIER_AUDIO + Musique.TypeMusique.BGM.nom + "/");
 				final File[] fichiersTrouves = dossierAudio.listFiles(new FilenameFilter() {
 				    public boolean accept(final File dir, final String nomTotal) {
@@ -145,16 +121,14 @@ public abstract class LecteurAudio {
 						musique = new MusiqueOgg(vraiNom, Musique.TypeMusique.BGM, volume);
 					} else if (vraiNom.endsWith(".wav")) {
 						musique = new MusiqueWav(vraiNom, Musique.TypeMusique.BGM, volume);
-					} else if (vraiNom.endsWith(".mp3")) {
-						musique = new MusiqueMp3(vraiNom, Musique.TypeMusique.BGM, volume);
 					} else {
-						// format non g�r�
+						// format non géré
 						LOG.error("Format audio inconnu : " + nom);
 						return;
 					}
 					LOG.warn("Le vrai nom du fichier audio \"" + nom +"\" devrait etre \""+ vraiNom +"\"");
 				} else {
-					// pas de fichier trouv�
+					// pas de fichier trouvé
 					LOG.error("Fichier audio introuvable : " + nom);
 					return;
 				}
@@ -204,8 +178,6 @@ public abstract class LecteurAudio {
 				musique = new MusiqueOgg(nom, Musique.TypeMusique.BGS, volume);
 			} else if (nom.endsWith(".wav")) {
 				musique = new MusiqueWav(nom, Musique.TypeMusique.BGS, volume);
-			} else if (nom.endsWith(".mp3")) {
-				musique = new MusiqueMp3(nom, Musique.TypeMusique.BGS, volume);
 			} else {
 				LOG.error("Format audio inconnu : "+nom);
 				return;

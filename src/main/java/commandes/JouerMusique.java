@@ -55,7 +55,7 @@ public class JouerMusique extends Commande implements CommandeEvent, CommandeMen
 	@Override
 	public final int executer(final int curseurActuel, final List<Commande> commandes) {
 		if (frame == 0) {
-			// D�marrage de la musique
+			// Démarrage de la musique
 			LecteurAudio.playBgm(this.nomFichierSonore, 0, piste);
 			this.frame++;
 
@@ -80,7 +80,7 @@ public class JouerMusique extends Commande implements CommandeEvent, CommandeMen
 				LecteurAudio.bgmEnCours[piste].modifierVolume(this.volume);
 				this.frame = 0;
 
-				LOG.info("La musique est d�marr�e.");
+				LOG.info("La musique est démarrée.");
 			} else {
 				LOG.error("Abandon de jouer la musique \"" + this.nomFichierSonore + "\"");
 			}
